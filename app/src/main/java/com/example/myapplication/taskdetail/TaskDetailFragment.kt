@@ -15,6 +15,7 @@
  */
 package com.example.myapplication.taskdetail
 
+import DELETE_RESULT_OK
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -29,7 +30,6 @@ import androidx.navigation.fragment.navArgs
 import com.example.myapplication.EventObserver
 import com.example.myapplication.R
 import com.example.myapplication.databinding.TaskdetailFragBinding
-import com.example.myapplication.tasks.DELETE_RESULT_OK
 import com.example.myapplication.util.setupRefreshLayout
 import com.example.myapplication.util.setupSnackbar
 import com.google.android.material.snackbar.Snackbar
@@ -85,7 +85,7 @@ class TaskDetailFragment : Fragment() {
         }
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
 
-        //viewModel.start(args.taskId)
+        viewModel.start(args.taskId)
 
         setHasOptionsMenu(true)
         return view
