@@ -107,7 +107,7 @@ class TasksFragment : Fragment() {
     private fun setupSnackbar() {
         view?.setupSnackbar(this, viewModel.snackbarText, Snackbar.LENGTH_SHORT)
         arguments?.let {
-            //viewModel.showEditResultMessage(args.userMessage)
+            viewModel.showEditResultMessage(0)
         }
     }
 
