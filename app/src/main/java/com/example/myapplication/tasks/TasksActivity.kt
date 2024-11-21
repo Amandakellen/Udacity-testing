@@ -17,10 +17,12 @@ package com.example.myapplication.tasks
 
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -39,17 +41,24 @@ class TasksActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tasks_act)
-        setupNavigationDrawer()
-        setSupportActionBar(findViewById(R.id.toolbar))
 
-        val navController: NavController = findNavController(R.id.nav_host_fragment)
-        appBarConfiguration =
-            AppBarConfiguration.Builder(R.id.tasks_fragment_dest, R.id.statistics_fragment_dest)
-                .setDrawerLayout(drawerLayout)
-                .build()
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        findViewById<NavigationView>(R.id.nav_view)
-            .setupWithNavController(navController)
+        // Configurar o DrawerLayout
+        setupNavigationDrawer()
+
+        // Configurar o NavController
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as? NavHostFragment
+        if (navHostFragment != null) {
+            val navController = navHostFragment.navController
+            // Configurar o AppBarConfiguration
+            appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
+            setupActionBarWithNavController(navController, appBarConfiguration)
+            findViewById<NavigationView>(R.id.nav_view)
+                .setupWithNavController(navController)
+        } else {
+            // Trate o caso em que navHostFragment é nulo
+            Log.e("TasksActivity", "NavHostFragment não encontrado!")
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
