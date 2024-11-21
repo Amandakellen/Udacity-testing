@@ -38,7 +38,7 @@ class AddEditTaskFragment : Fragment() {
 
     private lateinit var viewDataBinding: AddtaskFragBinding
 
-    //private val args: AddEditTaskFragmentArgs by navArgs()
+    private val args: AddEditTaskFragmentArgs by navArgs()
 
     private val viewModel by viewModels<AddEditTaskViewModel>()
 
@@ -60,7 +60,7 @@ class AddEditTaskFragment : Fragment() {
         setupSnackbar()
         setupNavigation()
         this.setupRefreshLayout(viewDataBinding.refreshLayout)
-        //viewModel.start(args.taskId)
+        viewModel.start(args.taskId)
     }
 
     private fun setupSnackbar() {
@@ -68,10 +68,10 @@ class AddEditTaskFragment : Fragment() {
     }
 
     private fun setupNavigation() {
-//        viewModel.taskUpdatedEvent.observe(this, EventObserver {
-//            val action = AddEditTaskFragmentDirections
-//                .actionAddEditTaskFragmentToTasksFragment(ADD_EDIT_RESULT_OK)
-//            findNavController().navigate(action)
-//        })
+        viewModel.taskUpdatedEvent.observe(viewLifecycleOwner, EventObserver {
+            val action = AddEditTaskFragmentDirections
+                .actionAddEditTaskFragmentToTasksFragment(ADD_EDIT_RESULT_OK)
+            findNavController().navigate(action)
+        })
     }
 }

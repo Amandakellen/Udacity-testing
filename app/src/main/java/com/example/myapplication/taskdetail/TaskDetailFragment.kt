@@ -40,7 +40,7 @@ import com.google.android.material.snackbar.Snackbar
 class TaskDetailFragment : Fragment() {
     private lateinit var viewDataBinding: TaskdetailFragBinding
 
-    //private val args: TaskDetailFragmentArgs by navArgs()
+    private val args: TaskDetailFragmentArgs by navArgs()
 
     private val viewModel by viewModels<TaskDetailViewModel>()
 
@@ -53,19 +53,19 @@ class TaskDetailFragment : Fragment() {
     }
 
     private fun setupNavigation() {
-//        viewModel.deleteTaskEvent.observe(this, EventObserver {
-//            val action = TaskDetailFragmentDirections
-//                .actionTaskDetailFragmentToTasksFragment(DELETE_RESULT_OK)
-//            findNavController().navigate(action)
-//        })
-//        viewModel.editTaskEvent.observe(this, EventObserver {
-//            val action = TaskDetailFragmentDirections
-//                .actionTaskDetailFragmentToAddEditTaskFragment(
-//                    args.taskId,
-//                    resources.getString(R.string.edit_task)
-//                )
-//            findNavController().navigate(action)
-//        })
+        viewModel.deleteTaskEvent.observe(viewLifecycleOwner, EventObserver {
+            val action = TaskDetailFragmentDirections
+                .actionTaskDetailFragmentToTasksFragment(DELETE_RESULT_OK)
+            findNavController().navigate(action)
+        })
+        viewModel.editTaskEvent.observe(viewLifecycleOwner, EventObserver {
+            val action = TaskDetailFragmentDirections
+                .actionTaskDetailFragmentToAddEditTaskFragment(
+                    args.taskId,
+                    resources.getString(R.string.edit_task)
+                )
+            findNavController().navigate(action)
+        })
     }
 
     private fun setupFab() {
