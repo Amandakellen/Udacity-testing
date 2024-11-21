@@ -15,7 +15,7 @@
  */
 package com.example.myapplication.addedittask
 
-import ADD_EDIT_RESULT_OK
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +27,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.myapplication.EventObserver
 import com.example.myapplication.R
 import com.example.myapplication.databinding.AddtaskFragBinding
+import com.example.myapplication.tasks.ADD_EDIT_RESULT_OK
 import com.example.myapplication.util.setupRefreshLayout
 import com.example.myapplication.util.setupSnackbar
 import com.google.android.material.snackbar.Snackbar
